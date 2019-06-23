@@ -3,7 +3,7 @@ package implementaciones;
 public class ColaPrioridadDinamica implements tdas.ColaPrioridadTDA {
 
 	NodoColaPrioridad mayorPrioridad;
-	
+
 	@Override
 	public void inicializar() {
 		mayorPrioridad = null;
@@ -14,14 +14,13 @@ public class ColaPrioridadDinamica implements tdas.ColaPrioridadTDA {
 		NodoColaPrioridad nuevo = new NodoColaPrioridad();
 		nuevo.info = valor;
 		nuevo.prioridad = prioridad;
-		
-		if(mayorPrioridad == null || prioridad.compareToIgnoreCase(mayorPrioridad.prioridad) > 0) {
+
+		if (mayorPrioridad == null || prioridad.compareToIgnoreCase(mayorPrioridad.prioridad) < 0) {
 			nuevo.sig = mayorPrioridad;
 			mayorPrioridad = nuevo;
-		}
-		else {
+		} else {
 			NodoColaPrioridad aux = mayorPrioridad;
-			while(aux.sig != null && aux.sig.prioridad.compareToIgnoreCase(prioridad) >= 0) {
+			while (aux.sig != null && prioridad.compareToIgnoreCase(aux.sig.prioridad) >= 0) {
 				aux = aux.sig;
 			}
 			nuevo.sig = aux.sig;
@@ -30,13 +29,13 @@ public class ColaPrioridadDinamica implements tdas.ColaPrioridadTDA {
 	}
 
 	@Override
-	public void dasacolar() {
+	public void desacolar() {
 		mayorPrioridad = mayorPrioridad.sig;
 	}
 
 	@Override
 	public String primero() {
-		return mayorPrioridad.info;				
+		return mayorPrioridad.info;
 	}
 
 	@Override

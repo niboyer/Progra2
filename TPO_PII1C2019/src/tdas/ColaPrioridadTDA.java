@@ -18,17 +18,17 @@ public interface ColaPrioridadTDA {
 	public void acolar(String valor, String prioridad);
 	
 	/**
-	 * Inicializada y no vacía
+	 * Inicializada y no vacï¿½a
 	 * */
-	public void dasacolar();
+	public void desacolar();
 	
 	/**
-	 * Inicializada y no vacía
+	 * Inicializada y no vacï¿½a
 	 * */
 	public String primero();
 	
 	/**
-	 * Inicializada y no vacía
+	 * Inicializada y no vacï¿½a
 	 * */
 	public String prioridad();
 	
