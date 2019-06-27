@@ -157,7 +157,7 @@ public class AgendaCitas implements tdas.AgendaCitasTDA {
 		resultado.inicilizar();
 		if(auxAgenda != null) {
 			NodoDia auxFecha = BuscarNodoFecha(auxAgenda.primeraFecha, fecha);
-			if(auxFecha != null) {
+			if(auxFecha != null && auxFecha.turnos != null) {
 				resultado = ObtenerTurnos(auxFecha.turnos);
 			}
 		}
