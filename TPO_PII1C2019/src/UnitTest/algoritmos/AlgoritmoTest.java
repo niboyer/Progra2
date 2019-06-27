@@ -388,7 +388,7 @@ public class AlgoritmoTest {
 		while (!horariosLibres.colaVacia()) {
 			ultimoAbogado = horariosLibres.primero();
 			ultimoHorario = horariosLibres.prioridad();
-			horariosLibres.dasacolar();
+			horariosLibres.desacolar();
 			cantidadElementosCola++;
 		}
 
@@ -425,7 +425,7 @@ public class AlgoritmoTest {
 		while (!horariosLibres.colaVacia()) {
 			ultimoAbogado = horariosLibres.primero();
 			ultimoHorario = horariosLibres.prioridad();
-			horariosLibres.dasacolar();
+			horariosLibres.desacolar();
 			cantidadElementosCola++;
 		}
 
