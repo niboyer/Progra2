@@ -1,9 +1,11 @@
 package TestAgenda;
 
+import implementaciones.AgendaCitas;
 import implementaciones.ArbolCitas;
-import implementaciones.ColaDinamica;
-import implementaciones.ColaPrioridadDinamica;
-import implementaciones.ConjuntoDinamico;
+import implementaciones.ColaEstatica;
+import implementaciones.ColaPrioridadEstatica;
+import implementaciones.ConjuntoEstatico;
+import tdas.AgendaCitasTDA;
 import tdas.ArbolCitasTDA;
 import tdas.ColaPrioridadTDA;
 import tdas.ColaTDA;
@@ -12,15 +14,17 @@ import tdas.ConjuntoTDA;
 public class Main {
 
 	public static void main(String[] args) {
-		ColaTDA testCola = new ColaDinamica();
-		ColaPrioridadTDA testColaPrioridad = new ColaPrioridadDinamica();
-		ConjuntoTDA testConjunto = new ConjuntoDinamico();
+		ColaTDA testCola = new ColaEstatica();
+		ColaPrioridadTDA testColaPrioridad = new ColaPrioridadEstatica();
+		ConjuntoTDA testConjunto = new ConjuntoEstatico();
 		ArbolCitasTDA testArbolCitas = new ArbolCitas();
+		AgendaCitasTDA testAgendaCitas = new AgendaCitas();
 
 		testCola.inicilizar();
 		testColaPrioridad.inicializar();
 		testConjunto.inicializar();
 		testArbolCitas.inicializar();
+		testAgendaCitas.inicializar();
 
 		testCola.acolar("Juan Alberto Zaragosa");
 		testCola.acolar("Pedro Joaquin Testro");
@@ -46,21 +50,50 @@ public class Main {
 		
 		MostrarConjunto(testConjunto);
 		
-		testArbolCitas.agregar("08:00", "Juan Alberto Zaragosa");
+		testArbolCitas.agregar("08:00", "Juan");
 		testArbolCitas.agregar("09:00", "Sebastian");
 		testArbolCitas.agregar("07:00", "Pablo");
 		testArbolCitas.agregar("07:30", "Joaquin");
 		testArbolCitas.agregar("06:30", "Nicolas");
 		testArbolCitas.agregar("08:30", "Pedro");
 		testArbolCitas.agregar("09:30", "Benito");
+		testArbolCitas.eliminar("08:00", "Juan");
 		
-		testArbolCitas.eliminar("08:00", "Juan Alberto Zaragosa");
+		testAgendaCitas.agregarNuevoDia("Abogado1", "Lunes", "2019/06/24");
+		testAgendaCitas.agregarNuevoDia("Abogado2", "Lunes", "2019/06/24");
+		testAgendaCitas.agregarNuevoDia("Abogado2", "Martes", "2019/06/25");
+		testAgendaCitas.agregarNuevoDia("Abogado2", "Miercoles", "2019/06/26");
+		testAgendaCitas.agregarNuevoDia("Abogado3", "Lunes", "2019/06/24");
+		testAgendaCitas.agregarNuevoDia("Abogado3", "Martes", "2019/06/25");
+		testAgendaCitas.agregarNuevoDia("Abogado3", "Miercoles", "2019/06/26");
 		
+		testAgendaCitas.agregarNuevaCita("Abogado1", "2019/06/24", "09:30", "Cliente1");
+		testAgendaCitas.agregarNuevaCita("Abogado1", "2019/06/24", "08:00", "Cliente2");
+		testAgendaCitas.agregarNuevaCita("Abogado1", "2019/06/24", "08:30", "Cliente3");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/24", "07:30", "Cliente4");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "07:00", "Cliente5");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "10:00", "Cliente6");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "10:30", "Cliente7");
+		
+		testAgendaCitas.eliminarAbogado("Abogado1");
+		testAgendaCitas.eliminarFecha("Abogado2", "2019/06/24");
+		testAgendaCitas.eliminarCita("Abogado2", "2019/06/25", "07:00", "Cliente5");
+		testAgendaCitas.existeCita("Abogado2", "2019/06/25", "09:00");
+		testAgendaCitas.clienteEnCita("Abogado2", "2019/06/25", "10:30");
+		
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "07:00", "Cliente5");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "06:30", "Cliente6");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "07:30", "Cliente7");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "08:00", "Cliente5");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "10:00", "Cliente6");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "09:30", "Cliente7");
+		
+		System.out.println("Primero: " + testAgendaCitas.turnos("Abogado2", "2019/06/25").primero());
 	}
 
 	private static void MostrarCola(ColaTDA cola) {
-		ColaTDA aux = new ColaDinamica();
-
+		ColaTDA aux = new ColaEstatica();
+		aux.inicilizar();
 		while (!cola.colaVacia()) {
 			System.out.println(cola.primero());
 			aux.acolar(cola.primero());
@@ -75,7 +108,7 @@ public class Main {
 
 	private static void MostrarColaPrioridad(ColaPrioridadTDA cola) {
 		ColaPrioridadTDA aux = cola;
-
+		
 		while (!aux.colaVacia()) {
 			System.out.println(aux.primero() + " | " + aux.prioridad());
 			aux.desacolar();
