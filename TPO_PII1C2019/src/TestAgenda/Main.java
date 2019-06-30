@@ -1,5 +1,6 @@
 package TestAgenda;
 
+import algoritmos.Algoritmo;
 import implementaciones.AgendaCitas;
 import implementaciones.ArbolCitas;
 import implementaciones.ColaEstatica;
@@ -19,6 +20,7 @@ public class Main {
 		ConjuntoTDA testConjunto = new ConjuntoEstatico();
 		ArbolCitasTDA testArbolCitas = new ArbolCitas();
 		AgendaCitasTDA testAgendaCitas = new AgendaCitas();
+		Algoritmo testAlg = new Algoritmo();
 
 		testCola.inicilizar();
 		testColaPrioridad.inicializar();
@@ -89,6 +91,9 @@ public class Main {
 		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "09:30", "Cliente7");
 		
 		System.out.println("Primero: " + testAgendaCitas.turnos("Abogado2", "2019/06/25").primero());
+		
+		testAlg.disponible(testAgendaCitas, "Abogado2", "2019/06/25", "22:00");
+		testAlg.libresTotal(testAgendaCitas, "2019/07/01");
 	}
 
 	private static void MostrarCola(ColaTDA cola) {

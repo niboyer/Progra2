@@ -70,6 +70,9 @@ public class AgendaCitas implements tdas.AgendaCitasTDA {
 				auxFecha.siguienteFecha = auxFecha.siguienteFecha.siguienteFecha;
 			auxFecha = auxFecha.siguienteFecha;
 		}
+		
+		if(auxAgenda.primeraFecha == null)
+			eliminarAbogado(abogado);
 	}
 
 	@Override
@@ -140,7 +143,7 @@ public class AgendaCitas implements tdas.AgendaCitasTDA {
 			if (auxAgenda.abogado.equalsIgnoreCase(abogado)) {
 				aux.agregar(auxAgenda.primeraFecha.fecha);
 				NodoDia auxFecha = auxAgenda.primeraFecha;
-				while (auxFecha.siguienteFecha != null) {
+				while (auxFecha != null) {
 					aux.agregar(auxFecha.fecha);
 					auxFecha = auxFecha.siguienteFecha;
 				}

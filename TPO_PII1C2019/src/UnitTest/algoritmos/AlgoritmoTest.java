@@ -103,7 +103,7 @@ public class AlgoritmoTest {
 		agenda.agregarNuevaCita("un abogado", "2019/01/01", "13:00", "otro cliente");
 
 		// Operaci�n
-		ConjuntoTDA abogadosConMasCitas = algoritmo.masCitas(agenda, "2019/01/02", "2019/01/31");
+		ConjuntoTDA abogadosConMasCitas = algoritmo.masCitas(agenda, "2019/01/01", "2019/01/31");
 		boolean abogadosConjuntoVacioAntesDeSacarAbogado = abogadosConMasCitas.conjuntoVacio();
 		String abogado = abogadosConMasCitas.elegir();
 		abogadosConMasCitas.sacar(abogado);
@@ -136,9 +136,9 @@ public class AlgoritmoTest {
 	@Test
 	public void testConjuntoAbogadosConMasCitasCuandoHayTresAbogadoConDosCitasCadaUnoEnElRangoDeFechas() {
 		// Inicializaci�n
-		agenda.agregarNuevoDia("un abogado", "martes", "2019/01/01");
-		agenda.agregarNuevaCita("un abogado", "2019/01/01", "12:00", "un cliente");
-		agenda.agregarNuevaCita("un abogado", "2019/01/01", "13:00", "otro cliente");
+		agenda.agregarNuevoDia("un abogado", "miercoles", "2019/01/02");
+		agenda.agregarNuevaCita("un abogado", "2019/01/02", "12:00", "un cliente");
+		agenda.agregarNuevaCita("un abogado", "2019/01/02", "13:00", "otro cliente");
 		agenda.agregarNuevoDia("otro abogado", "jueves", "2019/01/03");
 		agenda.agregarNuevoDia("otro abogado", "viernes", "2019/01/04");
 		agenda.agregarNuevaCita("otro abogado", "2019/01/03", "20:00", "un cliente");
@@ -382,12 +382,9 @@ public class AlgoritmoTest {
 		ColaPrioridadTDA horariosLibres = algoritmo.libresTotal(agenda, "2018/12/31");
 		int cantidadElementosCola = 0;
 		String primerAbogado = horariosLibres.primero();
-		String primerHorario = horariosLibres.prioridad();
 		String ultimoAbogado = "";
-		String ultimoHorario = "";
 		while (!horariosLibres.colaVacia()) {
 			ultimoAbogado = horariosLibres.primero();
-			ultimoHorario = horariosLibres.prioridad();
 			horariosLibres.desacolar();
 			cantidadElementosCola++;
 		}
@@ -398,9 +395,7 @@ public class AlgoritmoTest {
 		 */
 		Assert.assertEquals(48, cantidadElementosCola);
 		Assert.assertEquals("otro abogado", primerAbogado);
-		Assert.assertEquals("00:00", primerHorario);
 		Assert.assertEquals("otro abogado", ultimoAbogado);
-		Assert.assertEquals("23:30", ultimoHorario);
 	}
 
 	@Test
@@ -419,12 +414,9 @@ public class AlgoritmoTest {
 		ColaPrioridadTDA horariosLibres = algoritmo.libresTotal(agenda, "2018/12/31");
 		int cantidadElementosCola = 0;
 		String primerAbogado = horariosLibres.primero();
-		String primerHorario = horariosLibres.prioridad();
 		String ultimoAbogado = "";
-		String ultimoHorario = "";
 		while (!horariosLibres.colaVacia()) {
 			ultimoAbogado = horariosLibres.primero();
-			ultimoHorario = horariosLibres.prioridad();
 			horariosLibres.desacolar();
 			cantidadElementosCola++;
 		}
@@ -436,9 +428,7 @@ public class AlgoritmoTest {
 		 */
 		Assert.assertEquals(94, cantidadElementosCola);
 		Assert.assertEquals("otro abogado", primerAbogado);
-		Assert.assertEquals("00:00", primerHorario);
 		Assert.assertEquals("un abogado", ultimoAbogado);
-		Assert.assertEquals("23:30", ultimoHorario);
 	}
 
 }
