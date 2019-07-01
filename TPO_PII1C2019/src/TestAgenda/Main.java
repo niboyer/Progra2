@@ -94,6 +94,34 @@ public class Main {
 		
 		testAlg.disponible(testAgendaCitas, "Abogado2", "2019/06/25", "22:00");
 		testAlg.libresTotal(testAgendaCitas, "2019/07/01");
+		
+		System.out.println("Inicio Test masCitas");
+		testAgendaCitas.inicializar();
+		
+		testAgendaCitas.agregarNuevoDia("Abogado4", "Jueves", "2019/06/27");
+		testAgendaCitas.agregarNuevoDia("Abogado4", "Martes", "2019/06/25");
+		testAgendaCitas.agregarNuevoDia("Abogado4", "Lunes", "2019/06/24");
+		testAgendaCitas.agregarNuevoDia("Abogado4", "Miercoles", "2019/06/26");
+		testAgendaCitas.agregarNuevoDia("Abogado2", "Lunes", "2019/06/24");
+		testAgendaCitas.agregarNuevoDia("Abogado2", "Martes", "2019/06/25");
+		
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/24", "07:00", "Cliente5");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/24", "07:00", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "06:30", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "07:30", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado2", "2019/06/25", "07:00", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/25", "10:00", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/25", "09:30", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/26", "06:30", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/26", "07:30", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/27", "08:00", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/27", "10:00", "Cliente9");
+		testAgendaCitas.agregarNuevaCita("Abogado4", "2019/06/27", "09:30", "Cliente9");
+		
+		testConjunto.inicializar();
+		testConjunto = testAlg.masCitas(testAgendaCitas, "2019/06/22", "2019/06/27");
+		MostrarConjunto(testConjunto);		
+		System.out.println("Fin Test masCitas");
 	}
 
 	private static void MostrarCola(ColaTDA cola) {
