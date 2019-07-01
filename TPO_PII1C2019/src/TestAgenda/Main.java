@@ -122,6 +122,36 @@ public class Main {
 		testConjunto = testAlg.masCitas(testAgendaCitas, "2019/06/22", "2019/06/27");
 		MostrarConjunto(testConjunto);		
 		System.out.println("Fin Test masCitas");
+		
+		
+		testAgendaCitas.agregarNuevoDia("un abogado", "martes", "2019/01/01");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/01", "09:00", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/01", "10:30", "un cliente");
+		testAgendaCitas.agregarNuevoDia("otro abogado", "martes", "2019/01/01");
+		testAgendaCitas.agregarNuevaCita("otro abogado", "2019/01/01", "09:00", "otro cliente");
+		testAgendaCitas.agregarNuevaCita("otro abogado", "2019/01/01", "10:30", "un cliente");
+		testAgendaCitas.agregarNuevoDia("un abogado", "lunes", "2018/11/30");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2018/11/30", "11:30", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2018/11/30", "10:30", "otro cliente");
+		testAgendaCitas.agregarNuevoDia("un abogado", "martes", "2018/12/28");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2018/12/28", "09:00", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2018/12/28", "10:30", "un cliente");
+		testAgendaCitas.agregarNuevoDia("un abogado", "martes", "2019/02/13");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/02/13", "09:00", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/02/13", "10:30", "un cliente");
+		testAgendaCitas.agregarNuevoDia("un abogado", "martes", "2019/01/02");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "11:30", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "14:30", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "08:00", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "08:30", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "22:00", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "17:30", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "14:0", "un cliente");
+		testAgendaCitas.agregarNuevaCita("un abogado", "2019/01/02", "10:30", "un cliente");
+
+		// Operaci�n
+		//String[][] reuniones = testAlg.conQuienSeReunio(testAgendaCitas, "un cliente");
+		
 	}
 
 	private static void MostrarCola(ColaTDA cola) {

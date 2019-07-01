@@ -122,8 +122,8 @@ public class Algoritmo implements IAlgoritmo {
 			auxAbogadoValor = abogados.elegir();
 			fechas = auxAgenda.fechas(auxAbogadoValor);
 			while (!fechas.conjuntoVacio()) {
-				citas.inicilizar();
 				auxFechaValor = fechas.elegir();
+				citas.inicilizar();
 				citas = auxAgenda.turnos(auxAbogadoValor, auxFechaValor);
 				while (!citas.colaVacia()) {
 					auxCliente = auxAgenda.clienteEnCita(auxAbogadoValor, auxFechaValor, citas.primero());
@@ -133,12 +133,15 @@ public class Algoritmo implements IAlgoritmo {
 					}
 					citas.desacolar();
 				}
+				
 				fechas.sacar(auxFechaValor);
 			}
 			abogados.sacar(auxAbogadoValor);
 		}
 		String[][] resultado = new String[auxResultado.size()][];
 		auxResultado.toArray(resultado);
+		
+		ordenarPorFechaYHora(resultado);
 
 		return resultado;
 	}
@@ -210,6 +213,66 @@ public class Algoritmo implements IAlgoritmo {
 			return sdf.format(calendar.getTime());
 		} catch (ParseException e) {
 			return e.getMessage();
+		}
+	}
+	
+	private void ordenarPorFechaYHora(String[][] origen) {
+		String[] aux;
+		String fecha;
+		String fechaSig;
+		String hora;
+		String horaSig;
+		
+		for(int linea = 1; linea <= origen.length; linea++) {
+			for(int lineaSig = 0; lineaSig < origen.length - linea; lineaSig++) {
+				fecha = origen[lineaSig][1];
+				fechaSig = origen[lineaSig + 1][1];
+				hora = origen[lineaSig][2];
+				horaSig = origen[lineaSig + 1][2];
+				if(esFechaMenor(fecha,fechaSig)) {
+					aux = origen[lineaSig];
+					origen[lineaSig] = origen[lineaSig + 1];
+					origen[lineaSig + 1] = aux;
+				}
+				else if(fecha.equalsIgnoreCase(fechaSig) && esHoraMenor(hora, horaSig)){
+					aux = origen[lineaSig];
+					origen[lineaSig] = origen[lineaSig + 1];
+					origen[lineaSig + 1] = aux;
+				}
+			}
+		}
+	}
+	
+	//Si fechaSig es fecha menor que fechaMenor devuelvo true si es mayor false;
+	private boolean esFechaMenor(String fechaMenor, String fechaSig) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			Calendar calendarMenor = Calendar.getInstance();
+			Calendar calendarSig = Calendar.getInstance();
+
+			calendarMenor.setTime(sdf.parse(fechaMenor));
+			calendarSig.setTime(sdf.parse(fechaSig));
+
+			return calendarSig.before(calendarMenor);
+
+		} catch (ParseException e) {
+			return false;
+		}
+	}
+	
+	private boolean esHoraMenor(String horaMenor, String horaSig) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+			Calendar calendarMenor = Calendar.getInstance();
+			Calendar calendarSig = Calendar.getInstance();
+
+			calendarMenor.setTime(sdf.parse(horaMenor));
+			calendarSig.setTime(sdf.parse(horaSig));
+
+			return calendarSig.before(calendarMenor);
+
+		} catch (ParseException e) {
+			return false;
 		}
 	}
 }
