@@ -124,7 +124,7 @@ public class AlgoritmoTest {
 		agenda.agregarNuevaCita("otro abogado", "2019/01/03", "20:00", "un cliente");
 
 		// Operaci�n
-		ConjuntoTDA abogadosConMasCitas = algoritmo.masCitas(agenda, "2019/01/02", "2019/01/31");
+		ConjuntoTDA abogadosConMasCitas = algoritmo.masCitas(agenda, "2019/01/01", "2019/01/31");
 		String abogado = abogadosConMasCitas.elegir();
 		abogadosConMasCitas.sacar(abogado);
 
