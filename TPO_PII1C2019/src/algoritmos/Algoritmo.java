@@ -104,7 +104,7 @@ public class Algoritmo implements IAlgoritmo {
 		String auxAbogadoValor;
 		String auxFechaValor;
 		String auxCliente;
-		List<String[]> auxResultado = new ArrayList<String[]>();
+		String[][] auxResultado = new String[0][3];
 		ConjuntoTDA abogados = new ConjuntoEstatico();
 		ConjuntoTDA fechas = new ConjuntoEstatico();
 		ColaTDA citas = new ColaEstatica();
@@ -128,8 +128,8 @@ public class Algoritmo implements IAlgoritmo {
 				while (!citas.colaVacia()) {
 					auxCliente = auxAgenda.clienteEnCita(auxAbogadoValor, auxFechaValor, citas.primero());
 					if (auxCliente.equalsIgnoreCase(cliente)) {
-						String[] aux = new String[] { auxAbogadoValor, auxFechaValor, citas.primero() };
-						auxResultado.add(aux);
+						String[] nuevaLinea = new String[] { auxAbogadoValor, auxFechaValor, citas.primero() };
+						auxResultado = agregarLinea(auxResultado, nuevaLinea, auxResultado.length);
 					}
 					citas.desacolar();
 				}
@@ -138,12 +138,10 @@ public class Algoritmo implements IAlgoritmo {
 			}
 			abogados.sacar(auxAbogadoValor);
 		}
-		String[][] resultado = new String[auxResultado.size()][];
-		auxResultado.toArray(resultado);
 		
-		ordenarPorFechaYHora(resultado);
+		ordenarPorFechaYHora(auxResultado);
 
-		return resultado;
+		return auxResultado;
 	}
 
 	@Override
@@ -274,5 +272,16 @@ public class Algoritmo implements IAlgoritmo {
 		} catch (ParseException e) {
 			return false;
 		}
+	}
+	
+	private String[][] agregarLinea(String origen[][],String[] linea, int tamAnterior){
+		int i;
+		String[][] result = new String[tamAnterior+1][3];
+		for(i = 0; i < tamAnterior; i++) {
+			result[i] = origen[i];
+		}
+		if(i == tamAnterior)
+			result[i] = linea;
+		return result;
 	}
 }
