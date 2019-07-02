@@ -92,8 +92,12 @@ public class Main {
 		
 		System.out.println("Primero: " + testAgendaCitas.turnos("Abogado2", "2019/06/25").primero());
 		
-		testAlg.disponible(testAgendaCitas, "Abogado2", "2019/06/25", "22:00");
+		testAlg.disponible(testAgendaCitas, "Abogado2", "2019/06/25", "2019/06/25");
 		testAlg.libresTotal(testAgendaCitas, "2019/07/01");
+		
+		
+		System.out.println("CITAS: ");
+		mostrarCitas(testAlg.obtenerCitas(testAgendaCitas, "Abogado2", "2019/06/25"));
 	}
 
 	private static void MostrarCola(ColaTDA cola) {
@@ -129,5 +133,17 @@ public class Main {
 			aux.sacar(valor);
 			System.out.println(valor);
 		}
+	}
+	
+	private static void mostrarCitas(String citas[][]) {
+		int i = 1;
+		for(String cita[] : citas) {
+
+				System.out.println("Registro " + i++);
+				System.out.println("Dia: " + cita[0]);
+				System.out.println("Hora: " + cita[1]);
+				System.out.println("Cliente: " + cita[2]);				
+			}
+		
 	}
 }

@@ -263,7 +263,7 @@ public class AlgoritmoTest {
 		String[] terceraCitaEsperada = new String[] { "miercoles", "10:30", "un cliente" };
 
 		// Operaci�n
-		String[][] citas = algoritmo.obtenerCitas(agenda, "un abogado", "2019/12/31");
+		String[][] citas = algoritmo.obtenerCitas(agenda, "un abogado", "2018/12/31"); //Cambio al 2019 ya que con sumar días se va al 2020 y no tiene citas
 
 		// Validaci�n
 		Assert.assertEquals(3, citas.length);
