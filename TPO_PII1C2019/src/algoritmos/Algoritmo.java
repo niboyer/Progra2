@@ -9,12 +9,15 @@ import java.util.List;
 import implementaciones.ColaEstatica;
 import implementaciones.ColaPrioridadEstatica;
 import implementaciones.ConjuntoEstatico;
+import implementaciones.NodoDia;
 import tdas.AgendaCitasTDA;
 import tdas.ColaPrioridadTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
 
 public class Algoritmo implements IAlgoritmo {
+	
+	private final String semana[] = new String[] {"lunes", "martes", "miercoles", "jueves", "viernes"};
 
 	@Override
 	public boolean disponible(AgendaCitasTDA agenda, String abogado, String fecha, String hora) {
@@ -95,8 +98,26 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String[][] obtenerCitas(AgendaCitasTDA agenda, String abogado, String fecha) {
-		// TODO Auto-generated method stub
-		return null;
+		String resultado[][] = new String[][] {};
+		String cita;
+		int i;
+		ColaTDA turnos;
+		if (agenda != null) {
+			for (i = 0; i < 5; i++) {
+				turnos = agenda.turnos(abogado, fecha);
+				while (!turnos.colaVacia()) {
+					cita = turnos.primero();
+					resultado = agregarLinea(
+							resultado, 
+							new String[] {semana[i], cita, agenda.clienteEnCita(abogado, fecha, cita)}, 
+							resultado.length
+							);
+					turnos.desacolar();
+				}
+				fecha = sumaDiasFecha(fecha, 1);
+			}
+		}
+		return resultado;
 	}
 
 	@Override
@@ -214,6 +235,7 @@ public class Algoritmo implements IAlgoritmo {
 		}
 	}
 	
+
 	private void ordenarPorFechaYHora(String[][] origen) {
 		String[] aux;
 		String fecha;
