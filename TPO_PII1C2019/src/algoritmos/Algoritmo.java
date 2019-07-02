@@ -92,8 +92,38 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String abogadoUltimaVez(AgendaCitasTDA agenda, String cliente) {
-		// TODO Auto-generated method stub
-		return null;
+		ConjuntoTDA abogados = agenda.abogados();
+		ConjuntoTDA fechas;
+		ColaTDA turnos;
+		String candidatoFecha;
+		String candidatoTurno;
+		String candidatoAbogado;
+		String ultimoAbogado = "";
+		String ultimaFecha = null;
+		String candidatoCliente = "";
+		
+		while (!abogados.conjuntoVacio()) {
+			candidatoAbogado = abogados.elegir();
+			fechas = agenda.fechas(candidatoAbogado);
+			
+			while (!fechas.conjuntoVacio()) {
+				candidatoFecha = fechas.elegir();
+				turnos = agenda.turnos(candidatoAbogado, candidatoFecha);
+				
+				while (!turnos.colaVacia()) {
+					candidatoTurno = turnos.primero();
+					candidatoCliente = agenda.clienteEnCita(candidatoAbogado, candidatoFecha, candidatoTurno);
+					if ((candidatoCliente.equalsIgnoreCase(cliente)) && (ultimaFecha == null || ultimaFecha.compareToIgnoreCase(candidatoFecha) < 0)) {
+						ultimaFecha = candidatoFecha;
+						ultimoAbogado = candidatoAbogado;
+					}
+					turnos.desacolar();
+				}
+				fechas.sacar(candidatoFecha);
+			}
+			abogados.sacar(candidatoAbogado);
+		}
+		return ultimoAbogado;
 	}
 
 	@Override
@@ -306,4 +336,7 @@ public class Algoritmo implements IAlgoritmo {
 			result[i] = linea;
 		return result;
 	}
+	
+	
+
 }
