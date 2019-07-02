@@ -124,7 +124,7 @@ public class AlgoritmoTest {
 		agenda.agregarNuevaCita("otro abogado", "2019/01/03", "20:00", "un cliente");
 
 		// Operaci�n
-		ConjuntoTDA abogadosConMasCitas = algoritmo.masCitas(agenda, "2019/01/02", "2019/01/31");
+		ConjuntoTDA abogadosConMasCitas = algoritmo.masCitas(agenda, "2019/01/01", "2019/01/31");
 		String abogado = abogadosConMasCitas.elegir();
 		abogadosConMasCitas.sacar(abogado);
 
@@ -325,7 +325,7 @@ public class AlgoritmoTest {
 		agenda.agregarNuevaCita("un abogado", "2019/01/01", "10:30", "un cliente");
 		agenda.agregarNuevoDia("otro abogado", "martes", "2019/01/01");
 		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "09:00", "otro cliente");
-		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "10:30", "un cliente");
+		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "09:30", "un cliente");
 		agenda.agregarNuevoDia("un abogado", "lunes", "2018/12/31");
 		agenda.agregarNuevaCita("un abogado", "2018/12/31", "11:30", "un cliente");
 		agenda.agregarNuevaCita("un abogado", "2018/12/31", "10:30", "otro cliente");
