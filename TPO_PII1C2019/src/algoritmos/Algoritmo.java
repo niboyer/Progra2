@@ -2,22 +2,19 @@ package algoritmos;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import implementaciones.ColaEstatica;
 import implementaciones.ColaPrioridadEstatica;
 import implementaciones.ConjuntoEstatico;
-import implementaciones.NodoDia;
 import tdas.AgendaCitasTDA;
 import tdas.ColaPrioridadTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
 
 public class Algoritmo implements IAlgoritmo {
-	
-	private final String semana[] = new String[] {"lunes", "martes", "miercoles", "jueves", "viernes"};
+
+	private final String semana[] = new String[] { "lunes", "martes", "miercoles", "jueves", "viernes" };
 
 	@Override
 	public boolean disponible(AgendaCitasTDA agenda, String abogado, String fecha, String hora) {
@@ -137,11 +134,9 @@ public class Algoritmo implements IAlgoritmo {
 				turnos = agenda.turnos(abogado, fecha);
 				while (!turnos.colaVacia()) {
 					cita = turnos.primero();
-					resultado = agregarLinea(
-							resultado, 
-							new String[] {semana[i], cita, agenda.clienteEnCita(abogado, fecha, cita)}, 
-							resultado.length
-							);
+					resultado = agregarLinea(resultado,
+							new String[] { semana[i], cita, agenda.clienteEnCita(abogado, fecha, cita) },
+							resultado.length);
 					turnos.desacolar();
 				}
 				fecha = sumaDiasFecha(fecha, 1);
@@ -184,12 +179,12 @@ public class Algoritmo implements IAlgoritmo {
 					}
 					citas.desacolar();
 				}
-				
+
 				fechas.sacar(auxFechaValor);
 			}
 			abogados.sacar(auxAbogadoValor);
 		}
-		
+
 		ordenarPorFechaYHora(auxResultado);
 
 		return auxResultado;
@@ -264,7 +259,6 @@ public class Algoritmo implements IAlgoritmo {
 			return e.getMessage();
 		}
 	}
-	
 
 	private void ordenarPorFechaYHora(String[][] origen) {
 		String[] aux;
@@ -272,19 +266,18 @@ public class Algoritmo implements IAlgoritmo {
 		String fechaSig;
 		String hora;
 		String horaSig;
-		
-		for(int linea = 1; linea <= origen.length; linea++) {
-			for(int lineaSig = 0; lineaSig < origen.length - linea; lineaSig++) {
+
+		for (int linea = 1; linea <= origen.length; linea++) {
+			for (int lineaSig = 0; lineaSig < origen.length - linea; lineaSig++) {
 				fecha = origen[lineaSig][1];
 				fechaSig = origen[lineaSig + 1][1];
 				hora = origen[lineaSig][2];
 				horaSig = origen[lineaSig + 1][2];
-				if(esFechaMenor(fecha,fechaSig)) {
+				if (esFechaMenor(fecha, fechaSig)) {
 					aux = origen[lineaSig];
 					origen[lineaSig] = origen[lineaSig + 1];
 					origen[lineaSig + 1] = aux;
-				}
-				else if(fecha.equalsIgnoreCase(fechaSig) && esHoraMenor(hora, horaSig)){
+				} else if (fecha.equalsIgnoreCase(fechaSig) && esHoraMenor(hora, horaSig)) {
 					aux = origen[lineaSig];
 					origen[lineaSig] = origen[lineaSig + 1];
 					origen[lineaSig + 1] = aux;
@@ -292,8 +285,7 @@ public class Algoritmo implements IAlgoritmo {
 			}
 		}
 	}
-	
-	//Si fechaSig es fecha menor que fechaMenor devuelvo true si es mayor false;
+
 	private boolean esFechaMenor(String fechaMenor, String fechaSig) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -309,7 +301,7 @@ public class Algoritmo implements IAlgoritmo {
 			return false;
 		}
 	}
-	
+
 	private boolean esHoraMenor(String horaMenor, String horaSig) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -325,14 +317,14 @@ public class Algoritmo implements IAlgoritmo {
 			return false;
 		}
 	}
-	
-	private String[][] agregarLinea(String origen[][],String[] linea, int tamAnterior){
+
+	private String[][] agregarLinea(String origen[][], String[] linea, int tamAnterior) {
 		int i;
-		String[][] result = new String[tamAnterior+1][3];
-		for(i = 0; i < tamAnterior; i++) {
+		String[][] result = new String[tamAnterior + 1][3];
+		for (i = 0; i < tamAnterior; i++) {
 			result[i] = origen[i];
 		}
-		if(i == tamAnterior)
+		if (i == tamAnterior)
 			result[i] = linea;
 		return result;
 	}
